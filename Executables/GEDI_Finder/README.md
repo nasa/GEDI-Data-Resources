@@ -2,7 +2,7 @@
 
 ---
 # Objective:
-### The objective of this tutorial is to demonstrate how current GEDI Finder users can update their workflow for GEDI Version 2 (V2) data using NASA's CMR to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.
+### The objective of this tutorial is to demonstrate how Version 1 GEDI Finder users can update their workflow for GEDI Version 2 (V2) data using NASA's CMR to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.
 
 The Global Ecosystem Dynamics Investigation ([GEDI](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/)) mission aims to characterize ecosystem structure and dynamics to enable radically improved quantification and understanding of the Earth's carbon cycle and biodiversity. The Land Processes Distributed Active Archive Center (LP DAAC) distributes the GEDI Level 1 and Level 2 Version 1 and Version 2 products. The LP DAAC created the GEDI Finder _Web Service_ to allow users to perform spatial queries of GEDI _Version 1_ L1-L2 full-orbit granules. One of the updates for GEDI _Version 2_ included additional spatial metadata that allows users to perform spatial queries via a graphical user interface (GUI) using NASA's [Earthdata Search](https://search.earthdata.nasa.gov/search) or programmatically using NASA's [Common Metadata Repository](https://cmr.earthdata.nasa.gov/search) (CMR). Another update is that each GEDI V1 full-orbit granule has been divided into 4 sub-orbit granules in V2.   
 
@@ -46,7 +46,7 @@ If you prefer to not install Conda, the same setup and dependencies can be achie
 
 ---
 # Contact Information:
-#### Author: Cole Krehbiel¹   
+#### Author: LP DAAC¹   
 **Contact:** LPDAAC@usgs.gov  
 **Voice:** +1-866-573-3222  
 **Organization:** Land Processes Distributed Active Archive Center (LP DAAC)  

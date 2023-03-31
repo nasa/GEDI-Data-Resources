@@ -1,3 +1,4 @@
 *.ipynb_checkpoints
 *.h5*
 *.json
+*GranuleList*
