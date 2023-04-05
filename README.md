@@ -59,8 +59,6 @@ Material presented in Webinars and Workshops
 ## Helpful Links  
 
 + [University of Maryland GEDI](https://gedi.umd.edu/) - Learn more about the GEDI Mission  
-+ [LP DAAC GEDI L1B Product](https://lpdaac.usgs.gov/products/gedi01_bv002/) - GEDI Geolocated Waveforms product (GEDI01_B)
-+ [LP DAAC GEDI L2A Product](https://lpdaac.usgs.gov/products/gedi02_av002/) - GEDI Geolocated Elevation and Height Metrics product (GEDI02_A)
 + [OpenAltimetry](https://openaltimetry.org/data/gedi/) - Learn about GEDI coverage  
 
 
