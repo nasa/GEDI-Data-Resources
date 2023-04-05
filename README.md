@@ -45,7 +45,7 @@ Content in this repository is divided into 3 categories:
 
 Command line executables 
 
-+ **[GEDI Finder](/Executables/GEDI_Finder/GEDI_Finder.py)** performs spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
++ **[GEDI Finder](/Executables/GEDI_Finder/GEDI_Finder.py)** performs spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
 
 + **[GEDI Subsetter](/Executables/GEDI_Subsetter/GEDI_Subsetter.py)** converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software.  
 
