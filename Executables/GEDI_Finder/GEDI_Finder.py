@@ -20,8 +20,8 @@ import os
 # Set up argument and error handling
 parser = argparse.ArgumentParser(description="Performs a spatial and temporal query for GEDI V2 data using NASA's CMR and exports downloadable links as a text file.")
 parser.add_argument('--product', required=True, help='Specify the data product for your search query. Select from "GEDI01_B.002", "GEDI02_A.002", and "GEDI02_B.002".')
-parser.add_argument('-start', required=False, help='Start date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/20/2020).', default='04/25/2019')
-parser.add_argument('-end', required=False, help='Start date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/24/2020).', default=datetime.today().strftime ("%m/%d/%Y"))
+parser.add_argument('--start', required=False, help='Start date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/20/2020).', default='04/25/2019')
+parser.add_argument('--end', required=False, help='Start date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/24/2020).', default=datetime.today().strftime ("%m/%d/%Y"))
 parser.add_argument('--roi', required=True, help='Region of interest (ROI) to search the GEDI granules. \
                     Valid inputs is bounding box coordinates: LL_lon(Lower Left Longitude),LL_lat, UR_lon, UR_lat (Upper Right Latitude). Example: "-73.65,-12.64,-47.81,9.7"')
 args = parser.parse_args()
