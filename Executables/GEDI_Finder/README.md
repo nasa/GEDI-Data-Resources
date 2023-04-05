@@ -1,57 +1,69 @@
-# Spatial Querying of GEDI Version 2 Data in Python
+# Spatial and Temporal Querying of GEDI Version 2 Data in Python
 
----
+--- 
 # Objective:
-### The objective of this tutorial is to demonstrate how current GEDI Finder users can update their workflow for GEDI Version 2 (V2) data using NASA's CMR to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.
+### The objective of this tutorial is to demonstrate how to perform spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data, how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.
 
-The Global Ecosystem Dynamics Investigation ([GEDI](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/)) mission aims to characterize ecosystem structure and dynamics to enable radically improved quantification and understanding of the Earth's carbon cycle and biodiversity. The Land Processes Distributed Active Archive Center (LP DAAC) distributes the GEDI Level 1 and Level 2 Version 1 and Version 2 products. The LP DAAC created the GEDI Finder _Web Service_ to allow users to perform spatial queries of GEDI _Version 1_ L1-L2 full-orbit granules. One of the updates for GEDI _Version 2_ included additional spatial metadata that allows users to perform spatial queries via a graphical user interface (GUI) using NASA's [Earthdata Search](https://search.earthdata.nasa.gov/search) or programmatically using NASA's [Common Metadata Repository](https://cmr.earthdata.nasa.gov/search) (CMR). Another update is that each GEDI V1 full-orbit granule has been divided into 4 sub-orbit granules in V2.   
+--- 
+# Script Execution
 
-## Materials:  
- - The [Spatial Querying of GEDI Version 2 Data in Python Jupyter Notebook](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-python/browse/GEDI_Finder_Tutorial_Python.ipynb) shows step-by-step how to write a function to query CMR for a specific GEDI V2 product and bounding box region of interest, format the response into a list of links to download the intersecting GEDI data, and export the list to a text file.  
- - The [GEDI_Finder.py Python script](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-python/browse/GEDI_Finder.py) can be used to update current GEDI Finder workflows from the web service API endpoint to a CMR-based solution.     
+Once you have set up your environment and it has been activated, navigate to the directory containing the downloaded or cloned repo. The script requires a product shortname and region of interest as a bounding box.
 
-## Products Used:
-**1. [GEDI01_B.002](https://doi.org/10.5067/GEDI/GEDI01_B.002)**   
-**2. [GEDI02_A.002](https://doi.org/10.5067/GEDI/GEDI02_A.002)**   
-**3. [GEDI02_B.002](https://doi.org/10.5067/GEDI/GEDI02_B.002)**     
+> `python GEDI_Finder.py --product <Specify the data product from 'GEDI01_B.002', 'GEDI02_A.002', and 'GEDI02_B.002' for your search query.> --roi <insert bounding box coordinates here (LL_lon,LL_lat, UR_lon, UR_lat)> --start <Start date for time period of interest:valid format is mm/dd/yyyy> --end <Etart date for time period of interest:valid format is mm/dd/yyyy>`  
 
----
-# Prerequisites:
-This tutorial uses packages included in the Python Standard Library. Any `Python 3.X` installation should be able to execute the code. However, in order to execute the `Jupyter Notebook`, users will need to set up a Python environment that includes an installation of Jupyter Notebook.   
+### Example
 
----
-# Procedures:
-## Getting Started:  
-#### 1.	Copy/clone/download the [GEDI Finder Tutorial repo](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-python/archive?format=zip), or download the [GEDI Finder Python script](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-python/browse/GEDI_Finder.py)    
-## Python Environment Setup
-It is recommended to use [Conda](https://conda.io/docs/), an environment manager to set up a compatible Python environment. Download Conda for your OS here: https://www.anaconda.com/download/. Once you have Conda installed, Follow the instructions below to successfully setup a Python environment on Linux, MacOS, or Windows.
+> `python GEDI_Finder.py --product GEDI02_B.002 --roi '-73.65,-12.64,-47.81,9.7' --start 10/20/2020 --end 10/30/2020`  
 
-This Python Jupyter Notebook tutorial has been tested using Python version 3.8. Conda was used to create the python environment.
 
- - Using your preferred command line interface (command prompt, terminal, cmder, etc.) type the following to successfully create a compatible python environment:
-  > `conda create -n gedifinder -c conda-forge --yes python=3.8`   
+### Script Arguments  
 
-  > `conda activate gedifinder`  
+To see the full set of command line arguments and how to use them, type the following in the command prompt:
 
-  > `jupyter notebook`  
+```None
+> python HLS_SuPER.py -h  
 
-If you do not have Jupyter Notebook installed, you may need to run:  
-  > `conda install jupyter notebook`  
+usage: GEDI_Finder.py [-h] --product PRODUCT [--start START] [--end END] --roi ROI
+...
+```
 
-[Additional information](https://conda.io/docs/user-guide/tasks/manage-environments.html) on setting up and managing Conda environments.  
+#### --product {"GEDI01_B.002", "GEDI02_A.002", "GEDI02_B.002"}
 
-If you prefer to not install Conda, the same setup and dependencies can be achieved by using another package manager such as `pip`.   
+```None
+(Required) Desired GEDI product.   
 
-#### Still having trouble getting a compatible Python environment set up? Contact [LP DAAC User Services](https://lpdaac.usgs.gov/lpdaac-contact-us/).    
+``` 
+#### --roi ROI
+
+```None
+(Required) Region of Interest (ROI) for spatial query. Valid input is bounding box coordinates: 'LowerLeft_lon,LowerLeft_lat,UpperRight_lon,UpperRight_lat' NOTE: Negative coordinates MUST be
+written in single quotation marks '-120,43,-118,48'. If you are using MacOS, you may need to use double quotes followed by single quotes "'-120,43,-118,48'".
+
+```  
+
+#### --start START
+
+```None
+(Optional) Start date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/20/2020). (default: 04/25/2019)  
+
+```  
+
+#### --end END
+
+```None
+(Optional) End date for time period of interest: valid format is mm/dd/yyyy (e.g. 10/30/2020). (default: Today)  
+
+```  
+ 
 
 ---
 # Contact Information:
-#### Author: Cole Krehbiel¹   
+#### Author: LP DAAC¹   
 **Contact:** LPDAAC@usgs.gov  
 **Voice:** +1-866-573-3222  
 **Organization:** Land Processes Distributed Active Archive Center (LP DAAC)  
 **Website:** https://lpdaac.usgs.gov/  
-**Date last modified:** 05-21-2021  
+**Date last modified:** 04-04-2023  
 
 ¹KBR, Inc., contractor to the U.S. Geological Survey, Earth Resources Observation and Science (EROS) Center,  
  Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 for LP DAAC².  

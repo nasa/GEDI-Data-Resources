@@ -8,7 +8,10 @@ Welcome! This repository provides guides, short how-tos, and tutorials to help u
 
 ## GEDI Background  
 
-[GEDI](https://gedi.umd.edu/mission/mission-overview/) Level 1 and Level 2 Data Products are distributed by the [LP DAAC]([https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/]) and Level 3 and Level 4 Data Products are distributed by the [ORNL DAAC]([https://daac.ornl.gov/cgi-bin/dataset_lister.pl?p=40]). Search for and download GEDI data products using [NASA EarthData Search](https://search.earthdata.nasa.gov/search?q=%22GEDI%22)
+The Global Ecosystem Dynamics Investigation ([GEDI](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/)) mission aims to characterize ecosystem structure and dynamics to enable radically improved quantification and understanding of the Earth's carbon cycle and biodiversity. [GEDI](https://gedi.umd.edu/mission/mission-overview/) Level 1 and Level 2 Data Products are distributed by the Land Processes Distributed Active Archive Center ([LP DAAC][https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/]) and Level 3 and Level 4 Data Products are distributed by the [ORNL DAAC]([https://daac.ornl.gov/cgi-bin/dataset_lister.pl?p=40]).
+
+Search for and download GEDI _Version 2_ data products via a graphical user interface (GUI) using [NASA EarthData Search](https://search.earthdata.nasa.gov/search?q=%22GEDI%22) or programmatically using NASA's [Common Metadata Repository](https://cmr.earthdata.nasa.gov/search) (CMR).
+
 
 ---
 
@@ -38,14 +41,14 @@ Content in this repository is divided into 3 categories:
 + [Spatial Querying of GEDI Version 2 Data in Python](/Tutorials/GEDI_Finder_Tutorial_Python.ipynb) demonstrate how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
 
 
-
 ### **2. Executables**  
 
 Command line executables 
 
-+ **[GEDI Finder](/Executables/GEDI_Finder)** performs spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
++ **[GEDI Finder](/Executables/GEDI_Finder/GEDI_Finder.py)** performs spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
 
-+ **[GEDI Subsetter](/Executables/GEDI_Subsetter)** converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software.  
++ **[GEDI Subsetter](/Executables/GEDI_Subsetter/GEDI_Subsetter.py)** converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software.  
+
 
 ### **3. Webinars and Workshop**
 
@@ -56,8 +59,6 @@ Material presented in Webinars and Workshops
 ## Helpful Links  
 
 + [University of Maryland GEDI](https://gedi.umd.edu/) - Learn more about the GEDI Mission  
-+ [LP DAAC GEDI L1B Product](https://lpdaac.usgs.gov/products/gedi01_bv002/) - GEDI Geolocated Waveforms product (GEDI01_B)
-+ [LP DAAC GEDI L2A Product](https://lpdaac.usgs.gov/products/gedi02_av002/) - GEDI Geolocated Elevation and Height Metrics product (GEDI02_A)
 + [OpenAltimetry](https://openaltimetry.org/data/gedi/) - Learn about GEDI coverage  
 
 
