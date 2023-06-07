@@ -1,2 +1,0 @@
-# GEDI Executables
-

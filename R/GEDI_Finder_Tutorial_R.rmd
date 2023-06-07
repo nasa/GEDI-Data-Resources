@@ -1,0 +1,189 @@
+---
+title: "Spatial Querying of GEDI Version 2 Data in R"
+output:
+  html_document:
+    df_print: paged
+---
+The Global Ecosystem Dynamics Investigation ([GEDI](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/)) mission aims to characterize ecosystem structure and dynamics to enable radically improved quantification and understanding of the Earth's carbon cycle and biodiversity. The Land Processes Distributed Active Archive Center (LP DAAC) distributes the GEDI Level 1 and Level 2 Version 1 and Version 2 products. The LP DAAC created the GEDI Finder _Web Service_ to allow users to perform spatial queries of GEDI _Version 1_ L1-L2 full-orbit granules. One of the updates for GEDI _Version 2_ included additional spatial metadata that allows users to perform spatial queries via a graphical user interface (GUI) using NASA's [Earthdata Search](https://search.earthdata.nasa.gov/search) or programmatically using NASA's [Common Metadata Repository](https://cmr.earthdata.nasa.gov/search) (CMR). Another update is that each GEDI V1 full-orbit granule has been divided into 4 sub-orbit granules in V2.    
+
+### The objective of this tutorial is to demonstrate how current GEDI Finder users can update their workflow for GEDI Version 2 (V2) data using NASA's CMR to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool. 
+
+## Use Case Example:  
+This tutorial was developed using an example use case for a current GEDI Finder user who has been using the GEDI Finder web service in R to find intersecting GEDI L2A Version 1 full-orbit granules over the Amazon Rainforest. The user is now looking to use the same workflow to find intersecting GEDI L2A V2 sub-orbit granules.  
+
+This tutorial will show how to use R to perform a spatial query for GEDI V2 data using NASA's CMR, how to reformat the CMR response into a list of links pointing to the intersecting sub-orbit granules on the LP DAAC Data Pool, and how to export the list of links as a text file.   
+
+***    
+
+## Applicable Data Products: 
+### This tutorial can be used to perform spatial queries on the following products:
+- **GEDI L1B Geolocated Waveform Data Global Footprint Level - [GEDI01_B.002](https://doi.org/10.5067/GEDI/GEDI01_B.002)**
+- **GEDI L2A Elevation and Height Metrics Data Global Footprint Level - [GEDI02_A.002](https://doi.org/10.5067/GEDI/GEDI02_A.002)**
+- **GEDI L2B Canopy Cover and Vertical Profile Metrics Data Global Footprint Level - [GEDI02_B.002](https://doi.org/10.5067/GEDI/GEDI02_B.002)**
+
+***  
+
+# Topics Covered:
+1. [**Import Packages**](#importpackages)  
+2. [**Define Function to Query CMR**](#definefunction)      
+3. [**Execute GEDI_Finder Function**](#executefunction)      
+4. [**Export Results**](#exportresults)        
+
+***
+
+# Before Starting this Tutorial:
+## Setup and Dependencies 
+This tutorial is written as an R Markdown Notebook. In order to execute the tutorial, users will need to have R/RStudio installed, including the required packages to execute an R Markdown notebook. `httr` is the only package used in this tutorial.
+
+#### Having trouble getting set up? Contact LP DAAC User Services at: https://lpdaac.usgs.gov/lpdaac-contact-us/
+
+***
+
+## Source Code used to Generate this Tutorial:
+#### The repository containing the files is located at: https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-r/browse  
+- [R Notebook](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-r/browse/GEDI_Finder_Tutorial_R.rmd)    
+
+#### If you prefer to execute the code used in this tutorial outside of a Notebook, a simple R script version is available:  
+- [R Script](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-finder-tutorial-r/browse/GEDI_Finder.R)  
+
+***
+
+# 1. Import Packages <a id="importpackages"></a>
+The only package used in this tutorial is `httr`.
+
+```{r}
+# Check for required packages, install if not previously installed
+if ("httr" %in% rownames(installed.packages()) == FALSE) { install.packages("httr")}
+
+# Import Packages
+library(httr)
+```
+
+# 2. Define Function to Query CMR <a id="definefunction"></a>
+In the code cell below, define a function called `gedi_finder` that takes two *user-submitted* input values, a `product` and a `bbox`.  
+
+There are three available products for this function, including 'GEDI01_B.002', 'GEDI02_A.002' and 'GEDI02_B.002'. A list is set up to relate each product `shortname.version` to its associated `concept_id`, which is a value used by NASA's CMR to retrieve data for a specific product. Additional information on concept ID's can be found in the [CMR Search API Documentation](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html#c-concept-id).
+
+The second user-submitted input value, `bbox` is a string of bounding box coordinate values (decimal degrees) in the following format:
+Lower Left Longitude, Lower Left Latitude, Upper Right Longitude, Upper Right Latitude ("LLLon,LLLat,URLon,URLat")  
+
+> #### Example: `'-73.65,-12.64,-47.81,9.7'`
+
+```{r}
+# Define Function to Query CMR
+gedi_finder <- function(product, bbox) {
+
+  # Define the base CMR granule search url, including LPDAAC provider name and max page size (2000 is the max allowed)
+cmr <- "https://cmr.earthdata.nasa.gov/search/granules.json?pretty=true&provider=LPDAAC_ECS&page_size=2000&concept_id="
+  
+  # Set up list where key is GEDI shortname + version and value is CMR Concept ID
+  concept_ids <- list('GEDI01_B.002'='C1908344278-LPDAAC_ECS', 
+                      'GEDI02_A.002'='C1908348134-LPDAAC_ECS', 
+                      'GEDI02_B.002'='C1908350066-LPDAAC_ECS')
+  
+  # CMR uses pagination for queries with more features returned than the page size
+  page <- 1
+  bbox <- sub(' ', '', bbox)  # Remove any white spaces
+  granules <- list()          # Set up a list to store and append granule links to
+  
+  # Send GET request to CMR granule search endpoint w/ product concept ID, bbox & page number
+  cmr_response <- GET(sprintf("%s%s&bounding_box=%s&pageNum=%s", cmr, concept_ids[[product]],bbox,page))
+  
+  # Verify the request submission was successful
+  if (cmr_response$status_code==200){
+    
+    # Send GET request to CMR granule search endpoint w/ product concept ID, bbox & page number, format return as a list
+    cmr_url <- sprintf("%s%s&bounding_box=%s&pageNum=%s", cmr, concept_ids[[product]],bbox,page)
+    cmr_response <- content(GET(cmr_url))$feed$entry
+    
+    # If 2000 features are returned, move to the next page and submit another request, and append to the response
+    while(length(cmr_response) %% 2000 == 0){
+      page <- page + 1
+      cmr_url <- sprintf("%s%s&bounding_box=%s&pageNum=%s", cmr, concept_ids[[product]],bbox,page)
+      cmr_response <- c(cmr_response, content(GET(cmr_url))$feed$entry)
+    }
+    
+    # CMR returns more info than just the Data Pool links, below use for loop to grab each DP link, and add to list
+    for (i in 1:length(cmr_response)) {
+      granules[[i]] <- cmr_response[[i]]$links[[1]]$href
+    }
+    
+    # Return the list of links
+    return(granules)
+  } else {
+    
+    # If the request did not complete successfully, print out the response from CMR
+    print(content(GET(sprintf("%s%s&bounding_box=%s&pageNum=%s", cmr, concept_ids[[product]],bbox,page)))$errors)
+  }
+}
+
+```
+The function returns a list of links to download the intersecting GEDI sub-orbit V2 granules directly from the LP DAAC's Data Pool. 
+
+# 3. Execute GEDI Finder Function <a id="executefunction"></a>
+### Below is a demonstration of how to set the two required inputs to the `gedi_finder` function to variables.
+```{r}
+# User-provided inputs (UPDATE FOR YOUR DESIRED PRODUCT AND BOUNDING BOX REGION OF INTEREST)
+product <- 'GEDI02_B.002'           # Options include 'GEDI01_B.002', 'GEDI02_A.002', 'GEDI02_B.002'
+bbox <- '-73.65,-12.64,-47.81,9.7'  # bounding box coords in LL Longitude, LL Latitude, UR Longitude, UR Latitude format
+
+```
+Above, the variables are defined to query the `GEDI02_B.002` product for a bounding box covering the Amazon Rainforest.
+
+Next, call the `gedi_finder` function for the desired product and bounding box region of interest defined above, and set the output to a variable.
+
+```{r}
+# Call the gedi_finder function using the user-provided inputs
+granules <- gedi_finder(product, bbox)
+print(sprintf("%s %s Version 2 granules found.", length(granules), product))
+
+```
+Notice the print statement above will notify you how many granules intersected your bounding box for the product requested.
+
+# 4. Export Results <a id="exportresults"></a>
+
+Below is a demonstration of how to take the `granules` list of Data Pool links for intersecting GEDI V2 granules and export as a text file. The text file will be written to your current working directory, and will be named based on the date and time that the file was created. 
+```{r}
+# Export Results
+# Set up output textfile name using the current datetime
+outName <- sprintf("%s_GranuleList_%s.txt", sub('.002', '_002', product), format(Sys.time(), "%Y%m%d%H%M%S"))
+
+# Save to text file in current working directory
+write.table(granules, outName, row.names = FALSE, col.names = FALSE, quote = FALSE, sep='\n')
+print(sprintf("File containing links to intersecting %s Version 2 data has been saved to: %s/%s", product, getwd(), outName))
+
+```
+
+## Additional Resources
+Looking to bulk download the intersecting GEDI V2 files from your request? Check out the following LP DAAC resources to get you started:
+1. [How to Access LP DAAC Data from the Command Line](https://lpdaac.usgs.gov/resources/e-learning/how-access-lp-daac-data-command-line/)  
+2. [How to Access the LP DAAC Data Pool with Python](https://git.earthdata.nasa.gov/projects/LPDUR/repos/daac_data_download_python/browse)  
+3. [How to Access the LP DAAC Data Pool with R](https://git.earthdata.nasa.gov/projects/LPDUR/repos/daac_data_download_r/browse)  
+
+Also be sure to check out the following GEDI Resources:  
+
+1. [GEDI Spatial Querying and Subsetting Quick Guide V2](https://lpdaac.usgs.gov/documents/989/GEDI_Quick_Guide_V2.pdf)    
+  
+  - Explains how to perform spatial querying and subsetting of GEDI V2 data directly in NASA's Earthdata Search Client  
+  
+2. [GEDI Spatial and Band/layer Subsetting and Export to GeoJSON (GEDI Subsetter)   Script](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-subsetter/browse?_ga=2.194415528.402062677.1620050832-1162630485.1615217900)   
+  
+  - Allows you to subset GEDI V2 data by band/layer and region of interest  
+  
+3. [Getting Started with GEDI L1B, L2A, and L2B V2 Data in Python Tutorial Series](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-v2-tutorials/browse)  
+  
+  - Includes a series of tutorials that demonstrate how to start working with GEDI V2 data in Python.   
+
+<div class="alert alert-block alert-info">
+Contact Information  
+Material written by Cole Krehbiel$^{1}$  
+Contact: LPDAAC@usgs.gov   
+Voice: +1-605-594-6116   
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)   
+Website: https://lpdaac.usgs.gov/   
+Date last modified: 05-10-2021  
+
+$^{1}$KBR Inc., contractor to the U.S. Geological Survey, Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, 57198-001, USA. Work performed under USGS contract G15PD00467 for LP DAAC$^{2}$.
+
+$^{2}$LP DAAC Work performed under NASA contract NNG14HH33I.
+</div>
