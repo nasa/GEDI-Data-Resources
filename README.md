@@ -36,7 +36,7 @@ Instructions for setting up a compatible environment for working with GEDI data 
 
 ## Repository Contents  
 
-Content in this repository is divided into 3 categories:  
+Content in this repository is divided into Python and R tutorials/scripts. The tutorials walk you through workin with GEDI data step by step while the scripts are command line executables. 
 
 | Repository Contents | Summary | Path |
 |----|-----|----|
