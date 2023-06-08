@@ -38,21 +38,16 @@ Instructions for setting up a compatible environment for working with GEDI data 
 
 Content in this repository is divided into 3 categories:  
 
-### **1. Tutorial Notebooks**  
+| Repository Contents | Summary | Path |
+|----|-----|----|
+| **GEDI_L1B_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI01_B.002 data product using Python | `python\tutorials` |
+| **GEDI_L2A_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI02_A.002 data product using Python | `python\tutorials` |
+| **GEDI_L2B_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to how to work with the Geolocated Waveform GEDI02_B.002 data product using Python  | `python\tutorials` |
+| **GEDI_Finder_Tutorial_Python.ipynb** | Jupyter Notebook tutorial demonstrating how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool using Python | `python\tutorials` |
+| **GEDI_Finder_Tutorial_R.Rmd** | R Markdown tutorial demonstrating how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool  | `R` |
+| **GEDI_Finder.py** | Command line executable performing spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  | `python/scripts/GEDI_Finder` |
+| **GEDI_Subsetter.py** | Command line executable converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | `python/scripts/GEDI_Subsetter` |
 
-- [Getting Started with GEDI L1B Version 2 Data in Python](python/tutorials/GEDI_L1B_V2_Tutorial.ipynb) - demonstrates how to work with the Geolocated Waveform GEDI01_B.002 data product.  
-- [Getting Started with GEDI L2A Version 2 Data in Python](python/tutorials/GEDI_L2A_V2_Tutorial.ipynb) - demonstrates how to work with the Geolocated Waveform GEDI02_A.002 data product.  
-- [Getting Started with GEDI L2B Version 2 Data in Python](python/tutorials/GEDI_L2B_V2_Tutorial.ipynb)  - demonstrates how to work with the Geolocated Waveform GEDI02_B.002 data product.  
-- [Spatial Querying of GEDI Version 2 Data in Python](python/tutorials/GEDI_Finder_Tutorial_Python.ipynb) - demonstrate how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  
-- [Spatial Querying of GEDI Version 2 Data in R](r/GEDI_Finder_Tutorial_R.rmd) - demonstrate how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  
-
-### **2. Executables**  
-
-Command line executables.  
-
-- **[GEDI Finder](python/scripts/GEDI_Finder/GEDI_Finder.py)** performs spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  
-
-- **[GEDI Subsetter](python/scripts/GEDI_Subsetter/GEDI_Subsetter.py)** converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software.  
 
 ---  
 
@@ -60,6 +55,8 @@ Command line executables.
 
 - [University of Maryland GEDI](https://gedi.umd.edu/) - Learn more about the GEDI Mission  
 - [OpenAltimetry](https://openaltimetry.org/data/gedi/) - Learn about GEDI coverage  
+- [LP DAAC Website](https://lpdaac.usgs.gov/)
+- [LP DAAC GitHub](https://github.com/nasa/LPDAAC-Data-Resources)
 
 ---  
 
