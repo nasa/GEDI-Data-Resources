@@ -12,7 +12,7 @@ Search for and download GEDI _Version 2_ data products via a graphical user inte
 
 ---  
 
-## GEDI V2 Data Products  
+## [GEDI V2 Data Products](https://lpdaac.usgs.gov/product_search/?collections=GEDI&status=Operational&view=cards&sort=title)  
 
 - **GEDI L1B Geolocated Waveform Data Global Footprint Level - [GEDI01_B.002](https://doi.org/10.5067/GEDI/GEDI01_B.002)**  
 - **GEDI L2A Elevation and Height Metrics Data Global Footprint Level - [GEDI02_A.002](https://doi.org/10.5067/GEDI/GEDI02_A.002)**  
@@ -40,13 +40,13 @@ Content in this repository is divided into Python and R tutorials/scripts. The t
 
 | Repository Contents | Summary | Path |
 |----|-----|----|
-| **GEDI_L1B_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI01_B.002 data product using Python | `python\tutorials` |
-| **GEDI_L2A_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI02_A.002 data product using Python | `python\tutorials` |
-| **GEDI_L2B_V2_Tutorial.ipynb** | Jupyter Notebook tutorial demonstrating how to how to work with the Geolocated Waveform GEDI02_B.002 data product using Python  | `python\tutorials` |
-| **GEDI_Finder_Tutorial_Python.ipynb** | Jupyter Notebook tutorial demonstrating how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool using Python | `python\tutorials` |
-| **GEDI_Finder_Tutorial_R.Rmd** | R Markdown tutorial demonstrating how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool  | `R` |
-| **GEDI_Finder.py** | Command line executable performing spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  | `python/scripts/GEDI_Finder` |
-| **GEDI_Subsetter.py** | Command line executable converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | `python/scripts/GEDI_Subsetter` |
+| **[GEDI_L1B_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L1B_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI01_B.002 data product using Python | `python\tutorials` |
+| **[GEDI_L2A_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L2A_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to work with the Geolocated Waveform GEDI02_A.002 data product using Python | `python\tutorials` |
+| **[GEDI_L2B_V2_Tutorial.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_L2B_V2_Tutorial.ipynb)** | Jupyter Notebook tutorial demonstrating how to how to work with the Geolocated Waveform GEDI02_B.002 data product using Python  | `python\tutorials` |
+| **[GEDI_Finder_Tutorial_Python.ipynb](https://github.com/nasa/GEDI-Data-Resources/blob/main/python/tutorials/GEDI_Finder_Tutorial_Python.ipynb)** | Jupyter Notebook tutorial demonstrating how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool using Python | `python\tutorials` |
+| **[GEDI_Finder_Tutorial_R.Rmd](https://github.com/nasa/GEDI-Data-Resources/blob/main/r/GEDI_Finder_Tutorial_R.rmd)** | R Markdown tutorial demonstrating how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool  | `R` |
+| **[GEDI_Finder.py](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/scripts/GEDI_Finder)** | Command line executable performing spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules directly from the LP DAAC Data Pool.  | `python/scripts/GEDI_Finder` |
+| **[GEDI_Subsetter.py](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/scripts/GEDI_Subsetter)** | Command line executable converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | `python/scripts/GEDI_Subsetter` |
 
 
 ---  
@@ -57,6 +57,7 @@ Content in this repository is divided into Python and R tutorials/scripts. The t
 - [OpenAltimetry](https://openaltimetry.org/data/gedi/) - Learn about GEDI coverage  
 - [LP DAAC Website](https://lpdaac.usgs.gov/)
 - [LP DAAC GitHub](https://github.com/nasa/LPDAAC-Data-Resources)
+- [NASA Earthdata Search](https://search.earthdata.nasa.gov/search)
 
 ---  
 
