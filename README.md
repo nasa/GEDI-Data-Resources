@@ -22,8 +22,22 @@ Search for and download GEDI _Version 2_ data products via a graphical user inte
 
 ## Prerequisites/Setup Instructions  
 
+
+### File Downloads  
+
+These granules below are used within the tutorials. Click/copy the URLs into a browser to download. Save them into the `./data/` folder within this repository. You will need a [NASA Earth Data Search](https://search.earthdata.nasa.gov/search) login to download the data used in this tutorial. You can create an account at the link provided.  
+
++ L1B Granule - <https://e4ftl01.cr.usgs.gov/GEDI/GEDI01_B.002/2019.06.19/GEDI01_B_2019170155833_O02932_02_T02267_02_005_01_V002.h5>  
++ L2A Granule - <https://e4ftl01.cr.usgs.gov/GEDI/GEDI02_A.002/2019.06.19/GEDI02_A_2019170155833_O02932_02_T02267_02_003_01_V002.h5>  
++ L2B Granule - <https://e4ftl01.cr.usgs.gov/GEDI/GEDI02_B.002/2019.06.19/GEDI02_B_2019170155833_O02932_02_T02267_02_003_01_V002.h5>  
+
+---
+
+### Environment Setup 
+
 Instructions for setting up a compatible environment for working with GEDI data are linked to below.
-- [`Python` set up instructions](setup/setup_instructions_python.md)
+- [`Python` set up instructions](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/setup/setup_instructions_python.md)
+- [`R` set up instructions](https://github.com/nasa/LPDAAC-Data-Resources/blob/main/setup/setup_instructions_r.md)
 
 ---  
 
