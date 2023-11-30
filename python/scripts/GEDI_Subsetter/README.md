@@ -28,7 +28,7 @@ The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical
 
 ### Getting Started
 
-1. Download GEDI L1B-L2 Version 1 or Version 2 products from the [LP DAAC Data Pool](https://e4ftl01.cr.usgs.gov/GEDI/) or [Earthdata Search Client](https://search.earthdata.nasa.gov/search?q=GEDI) to a local directory (see above for applicable products).  
+1. Download GEDI L1B-L2 Version 2 products from the [LP DAAC Data Pool](https://e4ftl01.cr.usgs.gov/GEDI/) or [Earthdata Search Client](https://search.earthdata.nasa.gov/search?q=GEDI) to a local directory (see above for applicable products).  
 
 > **TIP:** Use the LP DAAC [GEDI Finder](https://lpdaacsvc.cr.usgs.gov/services/gedifinder) web service to input your bounding box region of interest and find the specific GEDI granules (files) intersecting your ROI. The service will return direct links to download the files you are looking for.  
 
