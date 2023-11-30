@@ -1,63 +1,87 @@
-# GEDI Spatial and Band/Layer Subsetting and Export to GeoJSON Script
----
-# Objective:
-The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software. When executing this script, a user will submit a desired region of interest (ROI) and input directory containing GEDI L1B-L2 files as command line arguments. The script begins by opening the GEDI products listed below that are contained in the input directory. Next, it uses the latitude and longitude arrays in the GEDI file to georeference each shot in the file. From there, the script performs spatial subsetting by using the user-submitted ROI to clip the GEDI shots in each file to only include those shots which fall within the bounding box of the region of interest (all GEDI shots and ROIs are treated as Geographic (EPSG:4326) coordinate reference system). By default, the script will loop through each of the eight GEDI beams and include all shots within the given ROI. There is an optional argument to subset for specific beams if needed. There are specific predefined datasets included in each output by product (see below) by default. However, if there are additional datasets within a given product that are desired, they can be included in the output geojson by specifying the optional `--sds` parameter when executing the script. For lists of all datasets in each GEDI L1B-L2 product, see below. The script then imports the data within the ROI for each of the desired GEDI datasets.  Ultimately, the script exports the spatial subset of desired datasets as a GeoJSON. By default, the script will loop through and perform the aforementioned steps for each GEDI L1B-L2 HDF5 file in the input directory. The output GeoJSON file will contain a row for each GEDI shot that was within the user-defined region of interest, and will contain columns for each of the desired layers. The output GeoJSONs can be brought into GIS or Remote Sensing Software and users can visualize each shot based on the layers contained in the attribute table of the output file.
+# GEDI Spatial and Band/Layer Subsetting and Export to GeoJSON Script  
 
-## Available Products:
-**1. [GEDI01_B.001](https://doi.org/10.5067/GEDI/GEDI01_B.001)**   
-**1. [GEDI01_B.002](https://doi.org/10.5067/GEDI/GEDI01_B.002)**   
-**2. [GEDI02_A.001](https://doi.org/10.5067/GEDI/GEDI02_A.001)**   
-**2. [GEDI02_A.002](https://doi.org/10.5067/GEDI/GEDI02_A.002)**   
-**3. [GEDI02_B.001](https://doi.org/10.5067/GEDI/GEDI02_B.001)**  
-**3. [GEDI02_B.002](https://doi.org/10.5067/GEDI/GEDI02_B.002)**  
+## Objective  
+
+The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software. When executing this script, a user will submit a desired region of interest (ROI) and input directory containing GEDI L1B-L2 files as command line arguments. The script begins by opening the GEDI products listed below that are contained in the input directory. Next, it uses the latitude and longitude arrays in the GEDI file to georeference each shot in the file. From there, the script performs spatial subsetting by using the user-submitted ROI to clip the GEDI shots in each file to only include those shots which fall within the bounding box of the region of interest (all GEDI shots and ROIs are treated as Geographic (EPSG:4326) coordinate reference system). By default, the script will loop through each of the eight GEDI beams and include all shots within the given ROI. There is an optional argument to subset for specific beams if needed. There are specific predefined datasets included in each output by product (see below) by default. However, if there are additional datasets within a given product that are desired, they can be included in the output geojson by specifying the optional `--sds` parameter when executing the script. For lists of all datasets in each GEDI L1B-L2 product, see below. The script then imports the data within the ROI for each of the desired GEDI datasets.  Ultimately, the script exports the spatial subset of desired datasets as a GeoJSON. By default, the script will loop through and perform the aforementioned steps for each GEDI L1B-L2 HDF5 file in the input directory. The output GeoJSON file will contain a row for each GEDI shot that was within the user-defined region of interest, and will contain columns for each of the desired layers. The output GeoJSONs can be brought into GIS or Remote Sensing Software and users can visualize each shot based on the layers contained in the attribute table of the output file.  
+
+## Available Products  
+
+1. **[GEDI01_B.002](https://doi.org/10.5067/GEDI/GEDI01_B.002)**  
+2. **[GEDI02_A.002](https://doi.org/10.5067/GEDI/GEDI02_A.002)**  
+3. **[GEDI02_B.002](https://doi.org/10.5067/GEDI/GEDI02_B.002)**  
 
 ---
-# Prerequisites:
+
+## Prerequisites
+
 *Disclaimer: This script has been tested on Windows and MacOS using the specifications identified below.*  
-+ #### Python version 3.7  
-  + `h5py`
-  + `shapely`
-  + `geopandas`
-  + `pandas`      
+
+### Python version 3.10  
++ `h5py`  
++ `shapely`  
++ `geopandas`  
++ `pandas`  
+
 ---
-# Procedures:
-## Getting Started:
-> #### 1.	Download GEDI L1B-L2 Version 1 or Version 2 products from the [LP DAAC Data Pool](https://e4ftl01.cr.usgs.gov/GEDI/) or [Earthdata Search Client](https://search.earthdata.nasa.gov/search?q=GEDI) to a local directory (see above for applicable products).
-> #### **PRO TIP: Use the LP DAAC [GEDI Finder](https://lpdaacsvc.cr.usgs.gov/services/gedifinder) web service to input your bounding box region of interest and find the specific GEDI granules (files) intersecting your ROI. The service will return direct links to download the files you are looking for.**
-> #### 2.	Copy/clone/download [GEDI_Subsetter.py](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-subsetter/browse/GEDI_Subsetter.py) from the LP DAAC Data User Resources Repository   
-## Python Environment Setup
-> #### 1. It is recommended to use [Conda](https://conda.io/docs/), an environment manager, to set up a compatible Python environment. Download Conda for your OS here: https://www.anaconda.com/download/. Once you have Conda installed, Follow the instructions below to successfully setup a Python environment on Windows, MacOS, or Linux.
-> #### 2. Setup
-> 1.  Open a new command line interface (MacOS/Linux: Terminal, Windows: Command Prompt) and type: `conda create -n gedi -c conda-forge --yes python=3.9 h5py shapely geopandas pandas`    
-> TIP: Getting an error from the command line saying 'Conda is not an executable command' or something of that nature? Try re-opening a new terminal/Command Prompt.
-> 2. Navigate to the directory where you downloaded the `GEDI_Subsetter.py` script
-> 3. Activate GEDI Python environment (created in step 1) in the Command Prompt/Terminal  
-  > Type:  Windows: `activate gedi` or MacOS: `source activate gedi`    
-> TIP: Having trouble activating your environment, or loading specific packages once you have activated your environment? Try the following:
-  > Type: 'conda update conda'    
-[Additional information](https://conda.io/docs/user-guide/tasks/manage-environments.html) on setting up and managing Conda environments.
-## Script Execution
-> #### Once you have set up your environment and it has been activated, run the script with the following in the Command Prompt/Terminal window:
-  > 1.  `python GEDI_Subsetter.py --dir <insert input directory with GEDI files here> --roi <insert geojson, shapefile, or bounding box coordinates here>`  
-    > 1a. Ex:   `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi LewisCountyWA.geojson`
-  > 2. If you prefer to submit a bounding box, use the following format:  `python GEDI_Subsetter.py --dir <insert input directory with GEDI files here> --roi <UpperLeftLatitude,UpperLeftLongitude,LowerRightLatitude,LowerRightLongitude>` (comma separated with no spaces)  
-    > 2a. Ex: `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5`   
-## Subsetting Layers:
-  > 3. The default functionality is to export each science dataset (SDS) layer contained in the default GEDI specification (see below) as a column contained in the output GeoJSON attribute table. If you prefer to export one or more layers not included by default, you can do so by adding the optional argument `--sds <insert SDS layer names desired>` (comma separated with no spaces, see below for specific SDS layer names by product).    
-    > 3a. Ex: `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5 --sds /all_samples_sum,/channel,/ancillary/mean_samples`  
-    > 3b. See below for specific SDS layer names by product.
-## Subsetting Beams:
-  > 4. The default functionality is to export each desired layer for each of the eight GEDI beams. If you prefer to only include specific beams, you can do so by adding the optional argument `--beams` in comma separated format with no spaces between beams:  
-      > 4a. Ex: `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5 --beams BEAM0101,BEAM0110,BEAM1000,BEAM1011` (Full Power Beams only, for example)
 
-## Considerations:
- - Due to the large file size of GEDI products and thousands of layers included in each file, processing times can take from **minutes to hours**. In order to speed up processing, be sure to clip to your exact region of interest and only include the Beams/layers needed for your research/application. This will also provide a faster experience when importing the output GeoJSON file into GIS or Remote Sensing software.  
- - For multidimensional datasets, (ex: rh, which includes rh0 - rh100), each dimension will be split into a separate column in the output GeoJSON file (i.e. column rh0, column rh1, ... column rh99, column rh100)  
- - For the `rxwaveform` and `txwaveform` datasets, each waveform will be stored as a comma separated list of the waveform values for each shot (ex: 230.6967,230.554,230.4744,...229.1028,228.6807,228.4076)   
+## Procedures
 
-## List of GEDI Layers by Product
+### Getting Started
+
+1. Download GEDI L1B-L2 Version 1 or Version 2 products from the [LP DAAC Data Pool](https://e4ftl01.cr.usgs.gov/GEDI/) or [Earthdata Search Client](https://search.earthdata.nasa.gov/search?q=GEDI) to a local directory (see above for applicable products).  
+
+> **TIP:** Use the LP DAAC [GEDI Finder](https://lpdaacsvc.cr.usgs.gov/services/gedifinder) web service to input your bounding box region of interest and find the specific GEDI granules (files) intersecting your ROI. The service will return direct links to download the files you are looking for.  
+
+2. Copy/clone/download [GEDI_Subsetter.py](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-subsetter/browse/GEDI_Subsetter.py) from the LP DAAC Data User Resources Repository  
+
+### Python Environment Setup  
+
+1. It is recommended to use [miniforge](https://github.com/conda-forge/miniforge), an environment manager, to set up a compatible Python environment. Download miniforge for your OS here: https://github.com/conda-forge/miniforge#miniforge3. Once you have miniforge installed, Follow the instructions below to successfully setup a Python environment on Windows, MacOS, or Linux.  
+2. Setup  
+    1. Open a new command line interface (MacOS/Linux: Terminal, Windows: Command Prompt) and type: `mamba create -n gedi_env -c conda-forge --yes python=3.10 h5py shapely geopandas pandas`  
+    2. Navigate to the directory where you downloaded the `GEDI_Subsetter.py` script  
+    3. Activate GEDI Python environment (created in step 1) in the Command Prompt/Terminal and Type:  
+        - `activate gedi_env` on Windows  
+        - `source activate gedi_env` on MacOS  
+
+### Script Execution  
+
+Once you have set up your environment and it has been activated, run the script with the following in the Command Prompt/Terminal window:  
+
+**Examples**
+
+1. python GEDI_Subsetter.py --dir <insert input directory with GEDI files here> --roi <insert geojson, shapefile, or bounding box coordinates here>  
+    > `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi LewisCountyWA.geojson`  
+2. If you prefer to submit a bounding box, use the following format:  `python GEDI_Subsetter.py --dir <insert input directory with GEDI files here> --roi <UpperLeftLatitude,UpperLeftLongitude,LowerRightLatitude,LowerRightLongitude>` (comma separated with no spaces)  
+    > `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5`  
+
+### Subsetting Layers  
+
+The default functionality is to export each science dataset (SDS) layer contained in the default GEDI specification (see below) as a column contained in the output GeoJSON attribute table. If you prefer to export one or more layers not included by default, you can do so by adding the optional argument `--sds <insert SDS layer names desired>` (comma separated with no spaces, see below for specific SDS layer names by product).    
+
+**Example**  
+  > `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5 --sds /all_samples_sum,/channel,/ancillary/mean_samples`  
+
+See below for specific SDS layer names by product.  
+
+### Subsetting Beams  
+
+The default functionality is to export each desired layer for each of the eight GEDI beams. If you prefer to only include specific beams, you can do so by adding the optional argument `--beams` **in comma separated format** with no spaces between beams:  
+
+**Example** (Full Power Beams only)  
+  > `python GEDI_Subsetter.py --dir C:\Users\GEDI\ --roi 46.2,-122.8,42.1,-120.5 --beams BEAM0101,BEAM0110,BEAM1000,BEAM1011` 
+
+### Considerations
+
+- Due to the large file size of GEDI products and thousands of layers included in each file, processing times can take from **minutes to hours**. In order to speed up processing, be sure to clip to your exact region of interest and only include the Beams/layers needed for your research/application. This will also provide a faster experience when importing the output GeoJSON file into GIS or Remote Sensing software.  
+- For multidimensional datasets, (ex: rh, which includes rh0 - rh100), each dimension will be split into a separate column in the output GeoJSON file (i.e. column rh0, column rh1, ... column rh99, column rh100)  
+- For the `rxwaveform` and `txwaveform` datasets, each waveform will be stored as a comma separated list of the waveform values for each shot (ex: 230.6967,230.554,230.4744,...229.1028,228.6807,228.4076)  
+
+### List of GEDI Layers by Product
+
 **NOTE:** The layers in **BOLD** are the layers that are included in each output GeoJSON by default.    
-### **1.	GEDI01_B**  
+
+#### GEDI01_B  
  - /all_samples_sum  
  - /ancillary/master_time_epoch  (Version 2 only)
  - /ancillary/mean_samples
@@ -145,7 +169,7 @@ The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical
  - /tx_sample_start_index
  - **/txwaveform**
 
-### **2.	GEDI02_A**  
+#### GEDI02_A  
  - /ancillary/l2a_alg_count
  - **/beam**
  - **/channel**
@@ -687,7 +711,7 @@ The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical
  - **/solar_elevation**
  - **/surface_flag**
 
-### **3.	GEDI02_B**  
+#### GEDI02_B  
  - /algorithmrun_flag
  - /ancillary/dz
  - /ancillary/l2a_alg_count
@@ -888,12 +912,12 @@ The GEDI_Subsetter.py script converts GEDI data products, stored in Hierarchical
 
 ---
 # Contact Information:
-#### Author: Cole Krehbiel¹   
+#### Author: LP DAAC¹   
 **Contact:** LPDAAC@usgs.gov  
 **Voice:** +1-866-573-3222  
 **Organization:** Land Processes Distributed Active Archive Center (LP DAAC)  
 **Website:** https://lpdaac.usgs.gov/  
-**Date last modified:** 04-15-2021  
+**Date last modified:** 11-30-2023  
 
 ¹KBR, Inc., contractor to the U.S. Geological Survey, Earth Resources Observation and Science (EROS) Center,  
  Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 for LP DAAC².  
