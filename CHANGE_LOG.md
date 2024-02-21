@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
+## 2024-02-20  
+
+- Updated the current tutorials and scripts to work after GEDI V2 data collections are moved to the NASA Earthdata Cloud.
+- Added new how-tos for accessing GEDI V2
+    - [how-to-access-GEDI-data-Harmony.ipynb](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/how-tos/how-to-access-GEDI-data-Harmony.ipynb)
+    - [how-to-find-and-access-GEDI-data_earthaccess.ipynb](https://github.com/nasa/GEDI-Data-Resources/tree/main/python/how-tos/how-to-find-and-access-GEDI-data_earthaccess.ipynb)
+
+- Updated the readme.md
 
 ## 2023-11-30  
 
