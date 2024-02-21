@@ -83,7 +83,7 @@ else:
 prod = args.product
 
 # Create dictionary of shortnames for GEDI products
-concept_ids = {'GEDI01_B.002': 'C2142749196-LPCLOUD', 'GEDI02_A.002': 'C2142771958-LPCLOUD', 'GEDI02_B.002': 'C2142776747-LPCLOUD'}
+concept_ids = {'GEDI01_B.002': 'C1908344278-LPDAAC_ECS', 'GEDI02_A.002': 'C1908348134-LPDAAC_ECS', 'GEDI02_B.002': 'C1908350066-LPDAAC_ECS'}
 
 if prod in concept_ids:
     concept_id = concept_ids[prod]
@@ -94,7 +94,7 @@ else:
 def gedi_finder(concept_id, bbox, dates):
     
     # Define the base CMR granule search url, including LPDAAC provider name and max page size (2000 is the max allowed)
-    cmr = "https://cmr.earthdata.nasa.gov/search/granules.json?pretty=true&provider=LPCLOUD&page_size=2000&concept_id="
+    cmr = "https://cmr.earthdata.nasa.gov/search/granules.json?pretty=true&provider=LPDAAC_ECS&page_size=2000&concept_id="
     
     
     # CMR uses pagination for queries with more features returned than the page size

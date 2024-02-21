@@ -74,13 +74,12 @@ Lower Left Longitude, Lower Left Latitude, Upper Right Longitude, Upper Right La
 gedi_finder <- function(product, bbox) {
 
   # Define the base CMR granule search url, including LPDAAC provider name and max page size (2000 is the max allowed)
-cmr <- "https://cmr.earthdata.nasa.gov/search/granules.json?pretty=true&provider=LPCLOUD&page_size=2000&concept_id="
+cmr <- "https://cmr.earthdata.nasa.gov/search/granules.json?pretty=true&provider=LPDAAC_ECS&page_size=2000&concept_id="
   
   # Set up list where key is GEDI shortname + version and value is CMR Concept ID
-  concept_ids <- list('GEDI01_B.002'='C2142749196-LPCLOUD', 
-                      'GEDI02_A.002'='C2142771958-LPCLOUD', 
-                      'GEDI02_B.002'='C2142776747-LPCLOUD')
-
+  concept_ids <- list('GEDI01_B.002'='C1908344278-LPDAAC_ECS', 
+                      'GEDI02_A.002'='C1908348134-LPDAAC_ECS', 
+                      'GEDI02_B.002'='C1908350066-LPDAAC_ECS')
   
   # CMR uses pagination for queries with more features returned than the page size
   page <- 1
@@ -153,3 +152,38 @@ outName <- sprintf("%s_GranuleList_%s.txt", sub('.002', '_002', product), format
 write.table(granules, outName, row.names = FALSE, col.names = FALSE, quote = FALSE, sep='\n')
 print(sprintf("File containing links to intersecting %s Version 2 data has been saved to: %s/%s", product, getwd(), outName))
 
+```
+
+## Additional Resources
+Looking to bulk download the intersecting GEDI V2 files from your request? Check out the following LP DAAC resources to get you started:
+1. [How to Access LP DAAC Data from the Command Line](https://lpdaac.usgs.gov/resources/e-learning/how-access-lp-daac-data-command-line/)  
+2. [How to Access the LP DAAC Data Pool with Python](https://git.earthdata.nasa.gov/projects/LPDUR/repos/daac_data_download_python/browse)  
+3. [How to Access the LP DAAC Data Pool with R](https://git.earthdata.nasa.gov/projects/LPDUR/repos/daac_data_download_r/browse)  
+
+Also be sure to check out the following GEDI Resources:  
+
+1. [GEDI Spatial Querying and Subsetting Quick Guide V2](https://lpdaac.usgs.gov/documents/989/GEDI_Quick_Guide_V2.pdf)    
+  
+  - Explains how to perform spatial querying and subsetting of GEDI V2 data directly in NASA's Earthdata Search Client  
+  
+2. [GEDI Spatial and Band/layer Subsetting and Export to GeoJSON (GEDI Subsetter)   Script](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-subsetter/browse?_ga=2.194415528.402062677.1620050832-1162630485.1615217900)   
+  
+  - Allows you to subset GEDI V2 data by band/layer and region of interest  
+  
+3. [Getting Started with GEDI L1B, L2A, and L2B V2 Data in Python Tutorial Series](https://git.earthdata.nasa.gov/projects/LPDUR/repos/gedi-v2-tutorials/browse)  
+  
+  - Includes a series of tutorials that demonstrate how to start working with GEDI V2 data in Python.   
+
+<div class="alert alert-block alert-info">
+Contact Information  
+Material written by Cole Krehbiel$^{1}$  
+Contact: LPDAAC@usgs.gov   
+Voice: +1-605-594-6116   
+Organization: Land Processes Distributed Active Archive Center (LP DAAC)   
+Website: https://lpdaac.usgs.gov/   
+Date last modified: 05-10-2021  
+
+$^{1}$KBR Inc., contractor to the U.S. Geological Survey, Earth Resources Observation and Science (EROS) Center, Sioux Falls, South Dakota, 57198-001, USA. Work performed under USGS contract G15PD00467 for LP DAAC$^{2}$.
+
+$^{2}$LP DAAC Work performed under NASA contract NNG14HH33I.
+</div>
