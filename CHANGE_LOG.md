@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
+
+## 2024-03-01  
+
+- Removed the Harmony API how-to because the subsetting service will not be available for GEDI V2 data stored in the Earthdata Cloud at the moment.
+- Updated `how-to-find-and-access-GEDI-data_earthaccess.ipynb` with the expired token issue happening when higher number of granules were requested. 
+- Updated `how-to-find-and-access-GEDI-data_earthaccess.ipynb` narrative text. 
+
+
 ## 2024-02-20  
 
 - Updated the current tutorials and scripts to work after GEDI V2 data collections are moved to the NASA Earthdata Cloud.
