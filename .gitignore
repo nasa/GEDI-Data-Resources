@@ -1,5 +1,5 @@
 *.ipynb_checkpoints
 *.h5*
-*.json
+*_V002.json
 *GranuleList*
 *.Rhistory*
