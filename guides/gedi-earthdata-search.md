@@ -36,7 +36,7 @@ Now that the results have been filtered to the desired temporal and spatial exte
 
 Download all granules associated with the selected collection using the green button located in the bottom right-hand corner (Download All), select specific granules to add to an order using the add (**+**) button, or directly download the full granule using the icon.  
 
-### Step 5: Spatial and Band/Layer Subsetting  
+## Step 5: Spatial and Band/Layer Subsetting  
 
 Once you click on the green **Download All** button, you will be directed to Edit Options tab. Under “Select a data access method,” select **Stage For Delivery** to download source files or select **Customize** to create subset of granules.
 
