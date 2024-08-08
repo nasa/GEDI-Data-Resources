@@ -49,7 +49,7 @@ After the desired parameters for spatial and/or layer subsetting have been selec
 
 ![Image shows the customized option for GEDI data in Earthdata Search](https://github.com/nasa/GEDI-Data-Resources/tree/main/img/customize.png)
 
-### Step 6: Retrieve Data  
+## Step 6: Retrieve Data  
 
 When the data request is submitted, a Download Status screen will monitor the progress of the order.
 
