@@ -57,7 +57,7 @@ The status update emails are sent to the email address associated with the Earth
 
 Contact LP DAAC User Services at <lpdaac@usgs.gov> with any questions about the request. Be sure to reference the request ID in any correspondence.
 
-### Step 7: Download Data  
+## Step 7: Download Data  
 
 Download the output files by clicking on the .zip link in the email and unzipping into a local directory. Or, click on the .html link, which goes to a page including options to download files one by one, or download a .txt file containing links to all of the output files.   
 
