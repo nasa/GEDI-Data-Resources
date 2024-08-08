@@ -7,7 +7,7 @@ Canopy Cover and Vertical Profile Metrics Data ([GEDI02_B](https://doi.org/10.50
 
 This tutorial guides you through how to use NASA's [Earthdata Search](https://search.earthdata.nasa.gov/) to search for GEDI data containing only data for a region of interest (ROI) and for a temporal range. It also provides instruction on how to perform spatial and/or layer subsetting of GEDI sub-orbit granules in Earthdata Search and how to connect the search output (e.g. download or access links) to a programmatic workflow (locally or from within the cloud).  
 
-### Step 1. Earthdata Search Login  
+## Step 1. Earthdata Search Login  
 
 Earthdata Login credentials are required to download or access NASA Earth data products available at [Earthdata Search](https://search.earthdata.nasa.gov/). If you do not have an Earthdata account, create one at https://urs.earthdata.nasa.gov. 
 Remember your username and password; and use it to log in to Earthdata Search.
