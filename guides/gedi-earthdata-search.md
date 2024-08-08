@@ -30,7 +30,7 @@ The spatial subsetting allows you to draw a polygon, circle, or rectangle region
 
 ![Image shows the spatiotemporal subset for GEDI granules in Earthdata Search](https://github.com/nasa/GEDI-Data-Resources/tree/main/img/granules.png)
 
-### Step 4: Selecting Granules for Download  
+## Step 4: Selecting Granules for Download  
 
 Now that the results have been filtered to the desired temporal and spatial extent, you can see the footprints of the GEDI Version 2 sub-orbit granules intersecting your spatiotemporal query.  
 
