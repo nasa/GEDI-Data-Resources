@@ -13,7 +13,7 @@ Earthdata Login credentials are required to download or access NASA Earth data p
 Remember your username and password; and use it to log in to Earthdata Search.
 
 
-### Step 2. Search for dataset of interest  
+## Step 2. Search for dataset of interest  
 
 Search for a GEDI Version 2 collection by entering "GEDI v2"/"GEDI" or the dataset short name (e.g., GEDI01_B v002) into the search box in the upper left-hand corner of the page, and check the box for "Customizable" option under Feature options. The list of matching collections in the middle panel will be updated with your input. 
 Hover over the collections and select your collection. 
