@@ -20,7 +20,7 @@ Hover over the collections and select your collection.
 
 ![Image shows the collection search for GEDI granules in Earthdata Search](https://github.com/nasa/GEDI-Data-Resources/tree/main/img/collection.png)
 
-### Step 3. Perform a Spatiotemporal Search for Granules
+## Step 3. Perform a Spatiotemporal Search for Granules
 
 All available granules for the product will be included in the list of matching granules. The list of granules can be queried by temporal and/or spatial boundaries using the tools below the search bar in Earthdata Search.  
 The temporal subsetting allows for user-provided start and end date/time and will return any available granules acquired between those dates.  
