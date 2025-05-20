@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
+## 2025-05-20
+
+- Updated the broken links in L2A tutorial
 
 ## 2024-03-01  
 
