@@ -51,6 +51,8 @@ Content in this repository is divided into Python and R tutorials/scripts. The t
 | **GEDI_Finder.py** | [Command line executable](python/scripts/GEDI_Finder) | Script performing spatial [bounding box] and temporal queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR and reformats the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules | [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) |
 | **GEDI_Subsetter.py** | [Command line executable](python/scripts/GEDI_Subsetter) | Script converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | |
 | **how-to-find-and-access-GEDI-data_earthaccess.ipynb** | [Jupyter Notebook](python/how-tos/how-to-find-and-access-GEDI-data_earthaccess.ipynb) | Shows how to access GEDI data using earthaccess Python package locally and directly in the cloud | [earthaccess](https://github.com/nsidc/earthaccess) |
+| **how-to-access-GEDI-data-Harmony.ipynb** | [Jupyter Notebook](python/how-tos/how-to-access-GEDI-data-Harmony.ipynb) | Shows how to access and subset GEDI data using Harmony API | [Harmony](https://harmony.earthdata.nasa.gov/docs) |
+| **gedi-earthdata-search.md** | [Jupyter Notebook](guides/gedi-earthdata-search.md) | Shows how to find and access GEDI data using Earthdata Search. | [Earthdata search](https://search.earthdata.nasa.gov/search) |
 
 
 ---  
