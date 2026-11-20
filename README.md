@@ -43,9 +43,9 @@ Content in this repository is divided into Python and R tutorials/scripts. The t
 
 | Resource | Type | Summary | Services and Tools |
 |----|-----|----|----|
-| **[how to work with GEDI L1B](python/tutorials/GEDI_L1B_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to work with the Geolocated Waveform GEDI01_B.002 data product using Python | |
-| **[how to work with GEDI L2A](python/tutorials/GEDI_L2A_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to work with the Geolocated Waveform GEDI02_A.002 data product using Python | |
-| **[how to work with GEDI L2B](python/tutorials/GEDI_L2B_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to how to work with the Geolocated Waveform GEDI02_B.002 data product using Python | |
+| **[how to work with GEDI L1B](python/tutorials/GEDI_L1B_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to work with the GEDI01_B data product using Python | |
+| **[how to work with GEDI L2A](python/tutorials/GEDI_L2A_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to work with the GEDI02_A data product using Python | |
+| **[how to work with GEDI L2B](python/tutorials/GEDI_L2B_V2_Tutorial.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to how to work with the GEDI02_B data product using Python | |
 | **[how to access GEDI data using Harmony](python/how-tos/how-to-access-GEDI-data-Harmony.ipynb)** | Jupyter Notebook | Shows how to access and subset GEDI data using Harmony API | [Harmony](https://harmony.earthdata.nasa.gov/docs) |
 | **[GEDI Finder Python tutorial](python/tutorials/GEDI_Finder_Tutorial_Python.ipynb)** | Jupyter Notebook | Tutorial demonstrating how to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules using Python | [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) |
 | **[GEDI Finder R tutorial](r/GEDI_Finder_Tutorial_R.rmd)** | R Markdown | Tutorial demonstrating how to use R to perform spatial [bounding box] queries for GEDI V2 L1B, L2A, and L2B data using NASA's CMR, and how to reformat the CMR response into a list of links that will allow users to download the intersecting GEDI V2 sub-orbit granules | [CMR API](https://cmr.earthdata.nasa.gov/search/site/docs/search/api.html) |
@@ -53,7 +53,6 @@ Content in this repository is divided into Python and R tutorials/scripts. The t
 | **[GEDI Subsetter script](python/scripts/GEDI_Subsetter)** | Command line executable | Script converting GEDI data products, stored in Hierarchical Data Format version 5 (HDF5, .h5) into GeoJSON files that can be loaded into GIS and Remote Sensing Software | |
 | **[how to find and access GEDI data using earthaccess](python/how-tos/how-to-find-and-access-GEDI-data_earthaccess.ipynb)** | Jupyter Notebook | Shows how to access GEDI data using earthaccess Python package locally and directly in the cloud | [earthaccess](https://github.com/nsidc/earthaccess) |
 | **[GEDI Earthdata Search.md](guides/gedi-earthdata-search.md)** | Markdown | Shows how to find and access GEDI data using Earthdata Search. | [Earthdata search](https://search.earthdata.nasa.gov/search) |
-
 
 ---  
 
